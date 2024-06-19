@@ -1,0 +1,17 @@
+FROM node:21
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+COPY entrypoint-prod.sh /usr/src/app/entrypoint-prod.sh
+
+EXPOSE 3333
+
+ENTRYPOINT ["./entrypoint-prod.sh"]
