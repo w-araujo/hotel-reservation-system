@@ -1,8 +1,8 @@
-version: '3'
+version: '3.8'
 
 services:
   app:
-    container_name: hrs-api
+    container_name: hrs_api
     build:
       context: .
       dockerfile: Dockerfile.dev
@@ -13,6 +13,28 @@ services:
       - backend
     env_file:
       - .env
+    depends_on:
+      - sqlserver
+
+  sqlserver:
+    container_name: hrs_db_sqlserver
+    image: mcr.microsoft.com/mssql/server
+    ports:
+      - "1433:1433"
+    environment:
+      - "SA_PASSWORD: ${SA_PASSWORD}"
+      - "ACCEPT_EULA: ${ACCEPT_EULA}"
+    volumes:
+      - sqldata:/var/opt/mssql
+    restart: always
+    networks:
+      - backend
+    env_file:
+      - .env
+
+volumes:
+  sqldata:
+    driver: local
 
 networks:
   backend:
