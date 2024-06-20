@@ -1,7 +1,7 @@
 import { GuestService } from "../services/GuestService";
 import { prisma } from "../prisma/utils/client";
 
-describe("AddressService", () => {
+describe("GuestService", () => {
   let guestService: GuestService;
   let spyCreate: jest.SpyInstance;
 
