@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   app:
@@ -15,6 +15,8 @@ services:
       - .env
     depends_on:
       - sqlserver
+    volumes:
+      - ./src/logs:/usr/src/app/src/logs
 
   sqlserver:
     container_name: hrs_db_sqlserver
