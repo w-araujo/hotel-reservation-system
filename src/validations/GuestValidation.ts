@@ -28,6 +28,30 @@ class GuestValidation {
       return res.status(500).json({ error: "Internal server error" });
     }
   }
+
+  async update(req: Request, res: Response, next: NextFunction) {
+    const schema = z.object({
+      name: z.string().optional(),
+      email: z.string().email().optional(),
+      birthdate: z.string().date().optional(),
+      phone: z.string().min(5).optional(),
+      password: z.string().min(7).optional(),
+      addressId: z.number().optional(),
+    });
+
+    try {
+      schema.parse(req.body);
+      return next();
+    } catch (error) {
+      logger.error("Erro ao atualizar o guest | Validação -> (guest).");
+
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ errors: error.errors });
+      }
+
+      return res.status(500).json({ error: "Internal server error" });
+    }
+  }
 }
 
 export { GuestValidation };

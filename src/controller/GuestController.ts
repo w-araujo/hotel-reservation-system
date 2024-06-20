@@ -35,6 +35,37 @@ class GuestController {
       await disconnectPrisma();
     }
   }
+
+  async selfUpdate(req: Request, res: Response) {
+    try {
+      logger.info("Rota -> (/guest/selfUpdate) requisitada.");
+
+      await connectPrisma();
+
+      const data: Guest = req.body;
+
+      //@ts-ignore
+      const { id } = req.user;
+
+      const update = await guestService.update(
+        Number(id),
+        data.name,
+        data.email,
+        data.birthdate,
+        data.phone,
+        data.password
+      );
+      return res.status(200).json(update);
+    } catch (error) {
+      logger.error(
+        "Erro ao atualizar o address | Rota -> (/guest/selfUpdate)."
+      );
+
+      return res.status(404).json({ error: (error as Error).message });
+    } finally {
+      await disconnectPrisma();
+    }
+  }
 }
 
 export { GuestController };

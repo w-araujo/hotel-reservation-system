@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { GuestController } from "../controller/GuestController";
 import { GuestValidation } from "../validations/GuestValidation";
+import { authorization, authorizeGuest } from "../middlewares/authorization";
 
 const guestRouter = Router();
 const guestController = new GuestController();
@@ -73,4 +74,65 @@ const guestValidation = new GuestValidation();
 
 guestRouter.post("/create", guestValidation.create, guestController.create);
 
+/**
+ * @swagger
+ * /guest/selfUpdate:
+ *   patch:
+ *     tags: [Guest]
+ *     summary: Atualiza parcialmente seus próprios dados de hóspede
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               birthdate:
+ *                 format: date
+ *                 type: string
+ *               phone:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: "Retorna o hóspede atualizado"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 name:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 birthdate:
+ *                   type: string
+ *                 phone:
+ *                   type: string
+ *       404:
+ *         description: "Hóspede não encontrado"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Guest not found!"
+ */
+
+guestRouter.patch(
+  "/selfUpdate",
+  authorization,
+  authorizeGuest,
+  guestValidation.update,
+  guestController.selfUpdate
+);
 export { guestRouter };

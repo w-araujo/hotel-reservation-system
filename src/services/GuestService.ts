@@ -31,6 +31,38 @@ class GuestService implements IGuestMethods {
     delete guest.password;
     return guest;
   }
+
+  async update(
+    id: number,
+    name?: string,
+    email?: string,
+    birthdate?: Date,
+    phone?: string,
+    password?: string
+  ): Promise<Guest> {
+    const guest = await prisma.guest.findFirst({
+      where: { id },
+    });
+
+    if (!guest) {
+      throw new Error("Guest not found!");
+    }
+
+    const guestUpdated = await prisma.guest.update({
+      where: { id },
+      data: {
+        name,
+        email,
+        birthdate,
+        phone,
+        password,
+      },
+    });
+
+    delete guestUpdated.password;
+
+    return guestUpdated;
+  }
 }
 
 export { GuestService };

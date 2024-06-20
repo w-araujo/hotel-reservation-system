@@ -9,4 +9,12 @@ export interface IGuestMethods {
     password: string,
     addressId?: number
   ): Promise<Guest>;
+  update(
+    id: number,
+    name: string,
+    email: string,
+    birthdate: Date,
+    phone: string,
+    password: string
+  ): Promise<Guest>;
 }
