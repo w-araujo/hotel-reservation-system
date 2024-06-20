@@ -20,6 +20,7 @@ model Guest {
   birthdate       DateTime
   phone           String
   password        String  
+  role            String           @default("GUEST")
   address         Address?         @relation(fields: [addressId], references: [id])
   addressId       Int?             @unique   
   reservation     Reservation?
