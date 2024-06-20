@@ -9,4 +9,13 @@ export interface IAddressMethods {
     country: string,
     zipCode: string
   ): Promise<Address>;
+  update(
+    id: number,
+    street: string,
+    number: string,
+    city: string,
+    state: string,
+    country: string,
+    zipCode: string
+  ): Promise<Address>;
 }

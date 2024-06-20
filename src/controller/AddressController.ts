@@ -35,6 +35,32 @@ class AddressController {
       await disconnectPrisma();
     }
   }
+
+  async update(req: Request, res: Response) {
+    try {
+      logger.info("Rota -> (/address/update) requisitada.");
+
+      await connectPrisma();
+
+      const data: Address = req.body;
+      const update = await addressService.update(
+        Number(req.params.id),
+        data.street,
+        data.number,
+        data.city,
+        data.state,
+        data.country,
+        data.zipCode
+      );
+      return res.status(200).json(update);
+    } catch (error) {
+      logger.error("Erro ao atualizar o address | Rota -> (/address/update).");
+
+      return res.status(404).json({ error: (error as Error).message });
+    } finally {
+      await disconnectPrisma();
+    }
+  }
 }
 
 export { AddressController };

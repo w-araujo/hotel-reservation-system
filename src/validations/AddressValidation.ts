@@ -28,6 +28,30 @@ class AddressValidation {
       return res.status(500).json({ error: "Internal server error" });
     }
   }
+
+  async update(req: Request, res: Response, next: NextFunction) {
+    const schema = z.object({
+      street: z.string().optional(),
+      number: z.string().optional(),
+      city: z.string().optional(),
+      state: z.string().optional(),
+      country: z.string().optional(),
+      zipCode: z.string().optional(),
+    });
+
+    try {
+      schema.parse(req.body);
+      return next();
+    } catch (error) {
+      logger.error("Erro ao atualizar o address | Validação -> (address).");
+
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ errors: error.errors });
+      }
+
+      return res.status(500).json({ error: "Internal server error" });
+    }
+  }
 }
 
 export { AddressValidation };

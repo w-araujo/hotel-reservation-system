@@ -24,6 +24,38 @@ class AddressService implements IAddressMethods {
 
     return address;
   }
+
+  async update(
+    id: number,
+    street?: string,
+    number?: string,
+    city?: string,
+    state?: string,
+    country?: string,
+    zipCode?: string
+  ): Promise<Address> {
+    const address = await prisma.address.findFirst({
+      where: { id },
+    });
+
+    if (!address) {
+      throw new Error("Address not found!");
+    }
+
+    const addressUpdated = await prisma.address.update({
+      where: { id },
+      data: {
+        street,
+        number,
+        city,
+        state,
+        country,
+        zipCode,
+      },
+    });
+
+    return addressUpdated;
+  }
 }
 
 export { AddressService };

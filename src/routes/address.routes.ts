@@ -82,4 +82,77 @@ addressRouter.post(
   addressController.create
 );
 
+/**
+ * @swagger
+ * /address/update/{id}:
+ *   patch:
+ *     tags: [Address]
+ *     summary: Atualiza parcialmente um endereço pelo ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID do endereço a ser atualizado
+ *         schema:
+ *           type: integer
+ *           format: int64
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               street:
+ *                 type: string
+ *               number:
+ *                 type: string
+ *               city:
+ *                 type: string
+ *               state:
+ *                 type: string
+ *               country:
+ *                 type: string
+ *               zipCode:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: "Retorna o endereço atualizado"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 street:
+ *                   type: string
+ *                 number:
+ *                   type: string
+ *                 city:
+ *                   type: string
+ *                 state:
+ *                   type: string
+ *                 country:
+ *                   type: string
+ *                 zipCode:
+ *                   type: string
+ *       404:
+ *         description: "Endereço não encontrado para o ID fornecido"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Address not found!"
+ */
+
+addressRouter.patch(
+  "/update/:id",
+  addressValidation.update,
+  addressController.update
+);
+
 export { addressRouter };
