@@ -3,6 +3,8 @@ import { Guest } from "@prisma/client";
 import { prisma } from "../prisma/utils/client";
 import { hashed } from "../utils/password";
 
+import { AddressService } from "./AddressService";
+
 class GuestService implements IGuestMethods {
   async create(
     name: string,
@@ -16,6 +18,19 @@ class GuestService implements IGuestMethods {
     birthdateWithTime.setHours(0, 0, 0, 0);
 
     const encrypted = await hashed(password);
+
+    const addressService = new AddressService();
+
+    const address = await addressService.create(
+      "Default Street",
+      "0",
+      "Default City",
+      "Default State",
+      "Default Country",
+      "00000000"
+    );
+
+    addressId = address.id;
 
     const guest = await prisma.guest.create({
       data: {
