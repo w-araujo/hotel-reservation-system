@@ -61,6 +61,38 @@ class AddressController {
       await disconnectPrisma();
     }
   }
+
+  async selfUpdate(req: Request, res: Response) {
+    try {
+      logger.info("Rota -> (/address/selfUpdate) requisitada.");
+
+      await connectPrisma();
+
+      const data: Address = req.body;
+
+      //@ts-ignore
+      const { addressId } = req.user;
+
+      const update = await addressService.update(
+        Number(addressId),
+        data.street,
+        data.number,
+        data.city,
+        data.state,
+        data.country,
+        data.zipCode
+      );
+      return res.status(200).json(update);
+    } catch (error) {
+      logger.error(
+        "Erro ao atualizar o próprio address | Rota -> (/address/selfUpdate)."
+      );
+
+      return res.status(404).json({ error: (error as Error).message });
+    } finally {
+      await disconnectPrisma();
+    }
+  }
 }
 
 export { AddressController };
