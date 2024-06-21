@@ -1,6 +1,11 @@
 import { Router } from "express";
 import { AddressController } from "../controller/AddressController";
 import { AddressValidation } from "../validations/AddressValidation";
+import {
+  authorization,
+  authorizeGuest,
+  authorizeAdmin,
+} from "../middlewares/authorization";
 
 const addressRouter = Router();
 const addressController = new AddressController();
@@ -151,8 +156,77 @@ addressRouter.post(
 
 addressRouter.patch(
   "/update/:id",
+  authorization,
+  authorizeAdmin,
   addressValidation.update,
   addressController.update
+);
+
+/**
+ * @swagger
+ * /address/selfUpdate:
+ *   patch:
+ *     tags: [Address]
+ *     summary: Atualiza parcialmente os próprios dados de endereço
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               street:
+ *                 type: string
+ *               number:
+ *                 type: string
+ *               city:
+ *                 type: string
+ *               state:
+ *                 type: string
+ *               country:
+ *                 type: string
+ *               zipCode:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: "Retorna o endereço atualizado"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 street:
+ *                   type: string
+ *                 number:
+ *                   type: string
+ *                 city:
+ *                   type: string
+ *                 state:
+ *                   type: string
+ *                 country:
+ *                   type: string
+ *                 zipCode:
+ *                   type: string
+ *       404:
+ *         description: "Endereço não encontrado"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Address not found!"
+ */
+
+addressRouter.patch(
+  "/selfUpdate",
+  authorization,
+  authorizeGuest,
+  addressValidation.update,
+  addressController.selfUpdate
 );
 
 export { addressRouter };

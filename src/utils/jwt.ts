@@ -10,6 +10,7 @@ function tokenGenerator(guest: Guest) {
       name: guest.name,
       email: guest.email,
       role: guest.role,
+      addressId: guest.addressId,
     },
     jwtKey,
     {

@@ -23,6 +23,7 @@ function authorization(req: Request, res: Response, next: NextFunction) {
       name: string;
       email: string;
       role: string;
+      addressId: number;
     };
 
     next();
