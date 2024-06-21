@@ -4,7 +4,7 @@
 npm run prisma:migrate
 
 # Generate Prisma client
-run prisma:generate
+npm run prisma:generate
 
 # Start the application
 npm run dev

@@ -23,7 +23,7 @@ model Guest {
   role            String           @default("GUEST")
   address         Address?         @relation(fields: [addressId], references: [id])
   addressId       Int?             @unique   
-  reservation     Reservation?
+  reservation     Reservation[]
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
 }
@@ -50,8 +50,8 @@ model Reservation {
   startDate       DateTime
   endDate         DateTime
   status          String     
-  guest           Guest?           @relation(fields: [guestId], references: [id])
-  guestId         Int?             @unique   
+  guest           Guest           @relation(fields: [guestId], references: [id])
+  guestId         Int             
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt     
 }
