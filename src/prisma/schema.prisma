@@ -46,7 +46,7 @@ model Reservation {
   hotelName       String
   roomNumber      String
   value           Decimal
-  date            DateTime
+  date            DateTime         @default(now())
   startDate       DateTime
   endDate         DateTime
   status          String           @default("CONFIRMED")
