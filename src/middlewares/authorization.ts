@@ -14,7 +14,7 @@ function authorization(req: Request, res: Response, next: NextFunction) {
   const [, token] = authHeader.split(" ");
 
   try {
-    logger.info("Middleware -> (authorizarion) requisitado.");
+    logger.info("Middleware -> (authorization) requisitado.");
     const decoded = decode(token);
 
     //@ts-ignore

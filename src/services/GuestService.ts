@@ -63,6 +63,17 @@ class GuestService implements IGuestMethods {
       throw new Error("Guest not found!");
     }
 
+    if (birthdate) {
+      const birthdateWithTime = new Date(birthdate);
+      birthdateWithTime.setHours(0, 0, 0, 0);
+      birthdate = birthdateWithTime;
+    }
+
+    if (password) {
+      const encrypted = await hashed(password);
+      password = encrypted;
+    }
+
     const guestUpdated = await prisma.guest.update({
       where: { id },
       data: {
