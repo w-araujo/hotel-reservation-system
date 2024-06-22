@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sleep 30
+
 # Execute Prisma migrations
 npm run prisma:migrate
 
