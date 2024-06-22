@@ -16,9 +16,9 @@ Creation of an API that manages guests and their reservations for a specific hot
 
 This API is automated with Docker, running its migrations, creating typings, and running the API together with the SQL Server database. It has Swagger available for making requests and includes user permission control.
 
-![er](https://github.com/w-araujo/hotel-reservation-system/blob/main/er-database.png)
+![er](https://github.com/w-araujo/hotel-reservation-system/blob/develop/er-database.png)
 
-![swagger](https://github.com/w-araujo/hotel-reservation-system/blob/main/swagger.png)
+![swagger](https://github.com/w-araujo/hotel-reservation-system/blob/develop/swagger.png)
 
 ## 🛠️ Technologies Used
 
@@ -73,7 +73,7 @@ https://www.docker.com/
         </li>
  </ul>
 
-## 🚀 Feeatures
+## 🚀 Features
 
 ### Public Endpoints
 
