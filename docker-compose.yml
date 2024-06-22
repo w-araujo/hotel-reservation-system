@@ -24,8 +24,8 @@ services:
     ports:
       - "1433:1433"
     environment:
-      - "SA_PASSWORD: ${SA_PASSWORD}"
-      - "ACCEPT_EULA: ${ACCEPT_EULA}"
+      - "SA_PASSWORD:${SA_PASSWORD}"
+      - "ACCEPT_EULA:${ACCEPT_EULA}"
     volumes:
       - sqldata:/var/opt/mssql
     restart: always
