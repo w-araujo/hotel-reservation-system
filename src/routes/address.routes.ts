@@ -83,6 +83,8 @@ const addressValidation = new AddressValidation();
 
 addressRouter.post(
   "/create",
+  authorization,
+  authorizeAdmin,
   addressValidation.create,
   addressController.create
 );

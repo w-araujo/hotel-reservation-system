@@ -23,7 +23,7 @@ model Guest {
   role            String           @default("GUEST")
   address         Address?         @relation(fields: [addressId], references: [id])
   addressId       Int?             @unique   
-  reservation     Reservation?
+  reservation     Reservation[]
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
 }
@@ -46,12 +46,12 @@ model Reservation {
   hotelName       String
   roomNumber      String
   value           Decimal
-  date            DateTime
+  date            DateTime         @default(now())
   startDate       DateTime
   endDate         DateTime
-  status          String     
-  guest           Guest?           @relation(fields: [guestId], references: [id])
-  guestId         Int?             @unique   
+  status          String           @default("CONFIRMED")
+  guest           Guest            @relation(fields: [guestId], references: [id])
+  guestId         Int             
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt     
 }

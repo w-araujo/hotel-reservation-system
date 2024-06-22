@@ -57,9 +57,7 @@ class GuestController {
       );
       return res.status(200).json(update);
     } catch (error) {
-      logger.error(
-        "Erro ao atualizar o address | Rota -> (/guest/selfUpdate)."
-      );
+      logger.error("Erro ao atualizar o guest | Rota -> (/guest/selfUpdate).");
 
       return res.status(404).json({ error: (error as Error).message });
     } finally {
