@@ -77,39 +77,63 @@ https://www.docker.com/
 
 ### Public Endpoints
 
-#### 1. Register guests (Creating a generic address) | route -> (POST) guest/create
-
-#### 2. Login to the system | route -> (POST) session/login
+<ol>
+ <li> 
+ Register guests (Creating a generic address) | route -> (POST) guest/create
+</li>
+ <li> 
+ Login to the system | route -> (POST) session/login
+ </li>
+</ol>
 
 ### Administrator Permission (ADMIN)
 
-#### 1. Can log in to the system | route -> (POST) session/login
-
-#### 2. Can register new addresses (not necessary) | route -> (POST) address/create
-
-#### 3. Can edit guests’ addresses or their own | route -> (PATCH) address/update/{id}
-
-#### 4. Can edit guests’ data or their own | route -> (PATCH) guest/update/{id}
-
-#### 5. Can update reservation to “CHECK IN” | route -> (PATCH) reservation/update/changeStatusCheckin/{id}
-
-#### 6. Can update reservation to “CHECK OUT” | route -> (PATCH) reservation/update/changeStatusCheckout/{id}
-
-#### 7. Can list reservations within a period | route -> (GET) reservation/getReservationsByPeriod
+<ol>
+ <li> 
+ Can log in to the system | route -> (POST) session/login
+ </li>
+ <li> 
+ Can register new addresses (not necessary) | route -> (POST) address/create
+ </li>
+ <li> 
+ Can edit guests’ addresses or their own | route -> (PATCH) address/update/{id}
+ </li>
+ <li> 
+  Can edit guests’ data or their own | route -> (PATCH) guest/update/{id}
+ </li>
+ <li> 
+ Can update reservation to “CHECK IN” | route -> (PATCH) reservation/update/changeStatusCheckin/{id}
+ </li>
+ <li> 
+ Can update reservation to “CHECK OUT” | route -> (PATCH) reservation/update/changeStatusCheckout/{id}
+ </li>
+ <li> 
+ Can list reservations within a period | route -> (GET) reservation/getReservationsByPeriod
+  </li>
+ </ol>
 
 ### Guest Permission (GUEST)
 
-#### 1. Can log in to the system | route -> (POST) session/login
-
-#### 2. Can edit their guest data | route -> (PATCH) guest/selfUpdate
-
-#### 3. Can edit their address | route -> (PATCH) address/selfUpdate
-
-#### 4. Can list their own reservations | route -> (GET) profile/selfReservations
-
-#### 5. Can create their reservation | route -> (POST) reservation/create
-
-#### 6. Can cancel their reservation | route -> (PATCH) reservation/update/changeStatusCanceled/{id}
+<ol>
+ <li> 
+ Can log in to the system | route -> (POST) session/login
+ </li>
+ <li> 
+ Can edit their guest data | route -> (PATCH) guest/selfUpdate
+ </li>
+ <li> 
+ Can edit their address | route -> (PATCH) address/selfUpdate
+ </li>
+ <li> 
+ Can list their own reservations | route -> (GET) profile/selfReservations
+ </li>
+ <li> 
+ Can create their reservation | route -> (POST) reservation/create
+ </li>
+  <li> 
+Can cancel their reservation | route -> (PATCH) reservation/update/changeStatusCanceled/{id}
+ </li>
+</ol>
 
 ## 📝 License
 
